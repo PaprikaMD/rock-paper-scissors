@@ -28,7 +28,7 @@ function playRound(playerSelection, computerSelection){
 }
 
 function cleanText(string){
-    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+    return string.length>0 ? string[0].toUpperCase() + string.slice(1).toLowerCase() : 'empty string';
 }
 
 function game() {
@@ -38,15 +38,21 @@ function game() {
     while((playerWins<3) && (computerWins < 3)){
         let playerSelection = cleanText(prompt('Enter your play: '));
         computerSelection = computerPlay();
+        console.log(`Computer chooses ${computerSelection}`);
         let result = playRound(playerSelection, computerSelection);
         if(result === 1){
             playerWins++;
-            alert(`You win! ${playerSelection} beats ${computerSelection}!`);
+            console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
         } else if (result === -1){
             computerWins++;
-            alert(`You lose! ${computerSelection} beats ${playerSelection}!`);
+            console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
         } else if (result === 0){
-            alert(`It's a tie! You both picked ${playerSelection}`);
+            console.log(`It's a tie! You both picked ${playerSelection}`);
         }
+        console.log(`Score is \nPlayer: ${playerWins}\nComputer: ${computerWins}`);
     }
+    if(playerWins === 3) console.log('Game over! You win!');
+    else console.log('Game over, the computer wins!');
 }
+
+game();
